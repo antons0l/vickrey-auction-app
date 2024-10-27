@@ -5,16 +5,17 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   const apiUrl = `${env.VITE_API_URL ?? ''}`;
-  console.log("debug check second var " + apiUrl)
+  const nodeEnv = `${env.VITE_NODE_ENV ?? 'development'}`
+  console.log("debug check second var " + nodeEnv)
   
   return {
-  server: {
-    proxy: {
-      '/api': {
-        target: apiUrl,
-        changeOrigin: true,
+    server: (nodeEnv === 'development') ? {
+      proxy: {
+        '/api': {
+          target: apiUrl,
+          changeOrigin: true,
+        },
       },
-    },
-  },
-  plugins: [react()],
+    } : {},
+    plugins: [react()],
   }});

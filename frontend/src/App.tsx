@@ -2,6 +2,7 @@ import logo from './assets/auction-logo.svg'
 import './App.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { urlBuilder } from './utils/urlBuilder';
 
 type Auction = {
   id: string;
@@ -12,9 +13,9 @@ function App() {
   const [auctions, setAuctions] = useState(new Array<Auction>);
 
   useEffect(()=> {
-    console.log("debug check var: " + import.meta.env.VITE_API_URL)
+    console.log("debug check var: " + import.meta.env.VITE_API_URL + " " + urlBuilder("/api/auctions"))
     const fetchAuctions = async () => {
-      const res = await axios.get(`/api/auctions`);
+      const res = await axios.get(urlBuilder("/api/auctions"));
       console.log("debug " + JSON.stringify(res.data))
       setAuctions(res.data)
     }
