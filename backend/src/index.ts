@@ -1,9 +1,24 @@
+import { drizzle } from 'drizzle-orm/d1'
 import { Hono } from 'hono'
+import { auctions } from './db/schema'
 
-const app = new Hono<{ Bindings: CloudflareBindings }>()
+export type Env = {
+  DB: D1Database
+}
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
+const app = new Hono<{ Bindings: Env }>()
+
+app.get('/auctions', async (c) => {
+  const db = drizzle(c.env.DB);
+  const result = await db.select().from(auctions).all();
+  return c.json(result);
+});
+
+app.post('/auctions', async (c) => {
+  const db = drizzle(c.env.DB);
+  const { title } = await c.req.json();
+  const result = await db.insert(auctions).values({title}).returning();
+  return c.json(result);
 })
 
 export default app

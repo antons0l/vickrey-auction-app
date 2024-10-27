@@ -2,6 +2,7 @@
 
 ```
 npm install
+npm run db:generate
 npm run dev
 ```
 
