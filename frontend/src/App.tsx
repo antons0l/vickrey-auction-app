@@ -12,6 +12,7 @@ function App() {
   const [auctions, setAuctions] = useState(new Array<Auction>);
 
   useEffect(()=> {
+    console.log("debug check var: " + import.meta.env.VITE_API_URL)
     const fetchAuctions = async () => {
       const res = await axios.get(`/api/auctions`);
       console.log("debug " + JSON.stringify(res.data))
