@@ -8,13 +8,13 @@ export type Env = {
 
 const app = new Hono<{ Bindings: Env }>()
 
-app.get('/auctions', async (c) => {
+app.get('/api/auctions', async (c) => {
   const db = drizzle(c.env.DB);
   const result = await db.select().from(auctions).all();
   return c.json(result);
 });
 
-app.post('/auctions', async (c) => {
+app.post('/api/auctions', async (c) => {
   const db = drizzle(c.env.DB);
   const { title } = await c.req.json();
   const result = await db.insert(auctions).values({title}).returning();
