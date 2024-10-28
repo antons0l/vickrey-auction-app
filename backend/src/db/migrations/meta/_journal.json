@@ -15,6 +15,13 @@
       "when": 1730085924446,
       "tag": "0001_careless_karen_page",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1730087303584,
+      "tag": "0002_colossal_mysterio",
+      "breakpoints": true
     }
   ]
 }

@@ -15,7 +15,7 @@ export const auctions = sqliteTable('auctions', {
   timestamp: text('timestamp').default(sql`CURRENT_TIMESTAMP`).notNull()
 });
 
-export const bid = sqliteTable('bid', {
+export const bids = sqliteTable('bids', {
   id: integer('id', {mode: 'number'}).primaryKey({autoIncrement: true}),
   auction_id: integer('auction_id', {mode: 'number'}),
   user_id: integer('user_id', {mode: 'number'}),
@@ -25,3 +25,4 @@ export const bid = sqliteTable('bid', {
 
 export type User = InferSelectModel<typeof users>
 export type Auction = InferSelectModel<typeof auctions>
+export type Bid = InferSelectModel<typeof bids>

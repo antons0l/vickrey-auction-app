@@ -1,0 +1,1 @@
+ALTER TABLE `bid` RENAME TO `bids`;
