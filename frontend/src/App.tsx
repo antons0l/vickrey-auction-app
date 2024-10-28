@@ -4,16 +4,26 @@ import axios from "axios";
 import { urlBuilder } from "./utils/urlBuilder";
 import AuctionCard from "./components/AuctionCard";
 import { Auction } from "./types/Types";
+import CreateAuctionModal from "./components/CreateAuctionModal";
 
 function App() {
   const [auctions, setAuctions] = useState(Array<Auction>());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  const fetchAuctions = async () => {
+    const res = await axios.get(urlBuilder("/api/auctions"));
+    setAuctions(res.data);
+  };
+
+  const handleCreateAuctionSubmit = async (data: { title: string; endAt: string }) => {
+    await axios.post(urlBuilder("/api/auctions"), data);
+    fetchAuctions();
+  }
 
   useEffect(() => {
-    const fetchAuctions = async () => {
-      const res = await axios.get(urlBuilder("/api/auctions"));
-      setAuctions(res.data);
-    };
-
     fetchAuctions();
   }, []);
 
@@ -24,17 +34,18 @@ function App() {
           <img src={logo} className="h-36 p-6" alt="auction logo" />
         </div>
         <h1 className="text-3xl font-semibold text-gray-800 mb-5">Vickrey Auction</h1>
-        <h2 className="text-xl mb-3">Here's the list of available auctions</h2>
+        <button className={`bg-cyan-700 disabled:bg-gray-500 px-6 py-1 text-white rounded-lg shadow-md focus:outline-none hover:scale-105 disabled:hover:scale-100`} onClick={handleOpenModal}>create an auction</button>
         <div>
           {auctions?.length > 0 ? (
             auctions.map((auction) => (
-              <AuctionCard key={auction?.id} title={auction?.title} status={auction?.status}></AuctionCard>
+              <AuctionCard key={auction?.id} title={auction?.title} status={auction?.status} endAt={auction?.endAt}></AuctionCard>
             ))
           ) : (
             <div>No auctions at the moment</div>
           )}
         </div>
       </div>
+      <CreateAuctionModal isOpen={isModalOpen} onClose={(handleCloseModal)} onSubmit={handleCreateAuctionSubmit}/>
     </>
   );
 }

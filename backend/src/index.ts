@@ -24,8 +24,8 @@ app.get('/api/auctions', async (c) => {
 
 app.post('/api/auctions', async (c) => {
   const db = drizzle(c.env.DB);
-  const { title } = await c.req.json();
-  const result = await db.insert(auctions).values({title}).returning();
+  const { title, endAt } = await c.req.json();
+  const result = await db.insert(auctions).values({title, endAt}).returning();
   return c.json(result, 200);
 });
 
