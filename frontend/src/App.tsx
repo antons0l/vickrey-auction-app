@@ -2,8 +2,8 @@ import logo from "./assets/auction-logo.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { urlBuilder } from "./utils/urlBuilder";
-import { Auction } from "../../backend/src/db/schema";
 import AuctionCard from "./components/AuctionCard";
+import { Auction } from "./types/Types";
 
 function App() {
   const [auctions, setAuctions] = useState(Array<Auction>());
