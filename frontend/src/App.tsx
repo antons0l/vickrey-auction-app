@@ -3,11 +3,7 @@ import './App.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { urlBuilder } from './utils/urlBuilder';
-
-type Auction = {
-  id: string;
-  title: string;
-}
+import { Auction } from '../../backend/src/db/schema';
 
 function App() {
   const [auctions, setAuctions] = useState(new Array<Auction>);

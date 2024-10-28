@@ -2,6 +2,11 @@
 
 ```
 npm install
+```
+
+Copy .env.example to .env.local and fill the local variables.
+
+```
 npm run dev
 ```
 
