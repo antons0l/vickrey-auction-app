@@ -1,52 +1,52 @@
 import { useState } from "react";
 import Modal from "./Modal";
 
-interface CreateAuctionModalProps {
+interface BidModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { title: string; endAt: string }) => void;
+  onSubmit: (data: { username: string; amount: number }) => void;
 }
 
-const CreateAuctionModal = ({
+const BidModal = ({
   isOpen,
   onClose,
   onSubmit,
-}: CreateAuctionModalProps) => {
-  const [title, setTitle] = useState("");
-  const [endAt, setEndAt] = useState("");
+}: BidModalProps) => {
+  const [username, setUserName] = useState("");
+  const [amount, setAmount] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ title, endAt });
-    setTitle("");
-    setEndAt("");
+    onSubmit({ username, amount });
+    setUserName("");
+    setAmount(0);
     onClose();
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <h2 className="text-lg font-semibold mb-4">Create a new auction</h2>
+      <h2 className="text-lg font-semibold mb-4">Set the bid</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Title
+            Your name
           </label>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
             required
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            End Time
+            Amount
           </label>
           <input
-            type="datetime-local"
-            value={endAt}
-            onChange={(e) => setEndAt(e.target.value)}
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
             required
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
@@ -70,4 +70,4 @@ const CreateAuctionModal = ({
   );
 };
 
-export default CreateAuctionModal;
+export default BidModal;

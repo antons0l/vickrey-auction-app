@@ -34,14 +34,14 @@ function App() {
           <img src={logo} className="h-36 p-6" alt="auction logo" />
         </div>
         <h1 className="text-3xl font-semibold text-gray-800 mb-5">Vickrey Auction</h1>
-        <button className={`bg-cyan-700 disabled:bg-gray-500 px-6 py-1 text-white rounded-lg shadow-md focus:outline-none hover:scale-105 disabled:hover:scale-100`} onClick={handleOpenModal}>create an auction</button>
+        <button className={`bg-[#1c4c84] disabled:bg-gray-500 px-6 py-1 text-white rounded-lg shadow-md focus:outline-none transition-transform hover:scale-105 disabled:hover:scale-100`} onClick={handleOpenModal}>create an auction</button>
         <div>
           {auctions?.length > 0 ? (
             auctions.map((auction) => (
-              <AuctionCard key={auction?.id} title={auction?.title} status={auction?.status} endAt={auction?.endAt}></AuctionCard>
+              <AuctionCard key={auction?.id} id={auction?.id} title={auction?.title} status={auction?.status} endAt={auction?.endAt}></AuctionCard>
             ))
           ) : (
-            <div>No auctions at the moment</div>
+            <div>No auctions available</div>
           )}
         </div>
       </div>
