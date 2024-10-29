@@ -11,6 +11,9 @@ database_id = "ebf92988-2539-47ac-85da-69a2452ad922"
 [vars]
 CORS_DOMAIN_ALLOW = "https://vickrey-auction-app.pages.dev"
 
+[triggers]
+crons = ["*/1 * * * *"]
+
 # Workers Logs
 # Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
 # Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs

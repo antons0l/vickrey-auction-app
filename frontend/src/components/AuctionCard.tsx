@@ -8,9 +8,11 @@ interface AuctionCardProps {
   title: string
   status: string
   endAt: string
+  winner: string
+  winAmount: string
 }
 
-export default function AuctionCard({ id, title, status, endAt }: AuctionCardProps) {
+export default function AuctionCard({ id, title, status, endAt, winner, winAmount }: AuctionCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -31,7 +33,7 @@ export default function AuctionCard({ id, title, status, endAt }: AuctionCardPro
       </div>
 
       {(status === 'CLOSED') ? (<p className="text-sm text-gray-500">ended at {endAt}</p>) : (<p className="text-sm text-gray-500">ends at {endAt}</p>)}
-
+      {(status === 'CLOSED') ? (<p className="text-sm text-gray-500">{(winner) ? `Winner is ${winner} with the bid of ${winAmount}` : "No winners"}</p>) : <></>}
       <button disabled={(status === 'CLOSED')} className={`bg-[#f8c10e] disabled:bg-gray-500 mt-5 px-6 py-1 text-white rounded-lg shadow-md transition-transform focus:outline-none hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed`} onClick={handleOpenModal}>bid</button>
       <BidModal isOpen={isModalOpen} onClose={(handleCloseModal)} onSubmit={(handleBidSubmit)}/>
     </div>

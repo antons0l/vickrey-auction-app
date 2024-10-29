@@ -3,4 +3,6 @@ export type Auction = {
   title: string,
   status: string,
   endAt: string,
+  winner_user_name: string;
+  winning_amount: string;
 }

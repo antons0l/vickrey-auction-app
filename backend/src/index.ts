@@ -1,6 +1,7 @@
 import { drizzle } from 'drizzle-orm/d1'
 import { Hono } from 'hono'
 import { Auction, auctions, bids, User, users } from './db/schema'
+import { closeAuctions } from './handlers/closeAuctions'
 
 export type Env = {
   DB: D1Database,
@@ -58,4 +59,10 @@ app.post('/api/bids', async (c) => {
   return c.json(result, 200);
 });
 
-export default app
+
+export default {
+  fetch: app.fetch,
+  scheduled: async (event: ScheduledEvent, env: Env) => {
+    await closeAuctions(env.DB);
+  },
+}

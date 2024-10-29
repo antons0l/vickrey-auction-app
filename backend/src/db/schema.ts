@@ -12,6 +12,8 @@ export const auctions = sqliteTable('auctions', {
   title: text('title', {length: 256}).notNull(),
   status: text('status').default('OPEN').notNull(),
   endAt: text('endAt'),
+  winner_user_name: text('winner_user_name'),
+  winning_amount: real('winning_amount'),
   timestamp: text('timestamp').default(sql`CURRENT_TIMESTAMP`).notNull()
 });
 
