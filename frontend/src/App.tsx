@@ -22,7 +22,7 @@ function App() {
     title: string;
     endAt: string;
   }) => {
-    await axios.post(urlBuilder("/api/auctions"), data);
+    await axios.post(urlBuilder("/api/auctions"), {title: data.title, endAt: new Date(data.endAt).toISOString()});
     fetchAuctions();
   };
 
